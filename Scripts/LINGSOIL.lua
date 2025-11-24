@@ -4,8 +4,13 @@ local index = 0;
 local count = 0;
 
 function LINGSOIL:OnInit()
-count = GridMgr.GridCount - 1;
+    if GridMgr and GridMgr.GridCount then
+        count = math.max(0, GridMgr.GridCount - 1)  -- 确保不为负数
+    else
+        count = 0  -- 提供默认值
+    end
 end
+
 
 function LINGSOIL:OnStep(dt)
     if flag == 0 then
