@@ -8,16 +8,21 @@ count = GridMgr.GridCount - 1;
 end
 
 function LINGSOIL:OnStep(dt)
-if flag == 0 then
-Map.Terrain:FullTerrain(index,"LingSoil");
-		if index == count then
-		flag = 1;
-		index = 0;
-		else
-		index = index + 1;
-		end
-	end
+    if flag == 0 then
+        local batchSize = 10  -- 每批处理10个地格
+        for i = 1, batchSize do
+            if index <= count then
+                Map.Terrain:FullTerrain(index, "LingSoil")
+                index = index + 1
+            else
+                flag = 1
+                index = 0
+                break
+            end
+        end
+    end
 end
+
 
 function LINGSOIL:OnSave()
     local tbSave = {index, flag};
