@@ -1,4 +1,4 @@
-﻿local LINGSOIL = GameMain:GetMod("LINGSOIL");
+local LINGSOIL = GameMain:GetMod("LINGSOIL");
 local flag = 0;
 local index = 0;
 local count = 0;
@@ -20,13 +20,13 @@ Map.Terrain:FullTerrain(index,"LingSoil");
 end
 
 function LINGSOIL:OnSave()
-	local tbSave = {index,flag};
-	return tbSave;
+    local tbSave = {index, flag};
+    return tbSave;
 end
 
 function LINGSOIL:OnLoad(tbLoad)
-	if tbLoad ~= nil then
-	index = tbLoad["index"]
-	flag = tbLoad["flag"]
-	end
+    if tbLoad ~= nil then
+        index = tbLoad[1] or 0  -- 使用数字索引访问
+        flag = tbLoad[2] or 0
+    end
 end
